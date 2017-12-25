@@ -1,0 +1,17 @@
+#importing the package
+library("Flury")
+data("computers")
+#to see the dataset
+View(computers)
+#building the model
+lm.model <- lm(computers$Minutes~computers$Units)
+coeff<-lm.model$coefficients
+#predicting 
+pred<-lm.model$fitted.values
+#SSE
+SSE<-sum((computers$Minutes-pred)^2)
+#plot
+plot(computers$Units,computers$Minutes,main = "Best fit model")
+abline(coeff[1],coeff[2])
+#Summary
+summary(lm.model)
