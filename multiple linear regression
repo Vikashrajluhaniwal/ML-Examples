@@ -1,0 +1,24 @@
+library("FRB")
+data("delivery")
+View(delivery)
+#plotting
+plot(delivery)
+#building a model
+delivery.lm<-lm(delivery$delTime~delivery$n.prod+delivery$distance)
+delivery.lm
+pred<-predict(delivery.lm,delivery)
+
+#visualization of the best fit model
+library(scatterplot3d)
+s3d<-scatterplot3d(delivery,type = "h",color="blue",angle=55,scale.y=0.5,
+                   pch=16,main="Multiple regression model")
+
+s3d$plane3d(delivery.lm,lty="solid")
+#correlation between n.prod and distance
+cor(delivery$n.prod,delivery$distance)
+library(car)
+vif(delivery.lm)
+#r-squared
+summary(delivery.lm)$r.squared
+#adjusted r-squared
+summary(delivery.lm)$r.squared
